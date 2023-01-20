@@ -4,7 +4,7 @@
 
   tasks:
           - name: Check uptime of remote Ubuntu server
-            cmd: uptime
+            shell: uptime
             register: command_output
 
           - debug:
