@@ -1,5 +1,5 @@
 ---
-- hosts: lapoli.ipsrambiente.it
+- hosts: lapoli.isprambiente.it
   name: Check uptime of the remote host
 
   tasks:
