@@ -4,9 +4,9 @@
 
   tasks:
           - name: First test
-            command: "ls -l | wc -l"
+            shell: "ls -l | wc -l"
             register: result
-          - name: debud
+          - name: debug
             debug:
               var: result
 
