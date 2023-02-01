@@ -9,7 +9,6 @@
           - name: debug
             debug:
               var: result
-              verbosity: 2
 
           - name: Check
             assert:
