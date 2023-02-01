@@ -3,9 +3,13 @@
   name: Garantire accesso sicuro
 
   tasks:
-    - name: Command to excecute
+    - name: First Command to excecute
       shell: "systemctl status sshd.service | egrep -i 'active' | wc -l"
       register: result
+
+    - name: Second Command to excecute
+      shell: "apt list telnetd | wc -l"
+      register: result1
 
     #- name: debug
     #  debug:
@@ -15,3 +19,4 @@
       assert:
         that:
              - "'1' in result.stdout_lines"
+             - "'0' in result1.stdout_lines"
