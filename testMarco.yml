@@ -13,4 +13,4 @@
           - name: Check
             assert:
               that:
-                   - "1" in result
+                   - "1 in result"
