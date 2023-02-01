@@ -4,8 +4,10 @@
 
   tasks:
           - name: First test
-            command: "ls -l"
+            command: "ls -l | wc -l"
             register: result
+            debug:
+              var: result
 
           - name: Check
             assert:
