@@ -4,7 +4,7 @@
 
   tasks:
           - name: First test
-            command: "systemctl status sshd.service | egrep -i "active" | wc -l"
+            command: "systemctl status sshd.service | egrep -i 'active' | wc -l"
             register: result
 
           - name: Check
