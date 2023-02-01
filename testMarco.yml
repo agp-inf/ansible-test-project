@@ -13,4 +13,4 @@
           - name: Check
             assert:
               that:
-                   - 1 in result.stdout_lines
+                   - "'1' in result.stdout_lines"
