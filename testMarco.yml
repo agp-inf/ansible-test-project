@@ -1,16 +1,17 @@
 ---
 - hosts: lapoli.isprambiente.it
-  name: First test
+  name: Garantire accesso sicuro
 
   tasks:
-          - name: First test
-            shell: "systemctl status sshd.service | egrep -i 'active' | wc -l"
-            register: result
-          - name: debug
-            debug:
-              var: result
+    - name: Command to excecute
+      shell: "systemctl status sshd.service | egrep -i 'active' | wc -l"
+      register: result
 
-          - name: Check
-            assert:
-              that:
-                   - "'1' in result.stdout_lines"
+    #- name: debug
+    #  debug:
+    #    var: result
+
+    - name: Check results
+      assert:
+        that:
+             - "'1' in result.stdout_lines"
