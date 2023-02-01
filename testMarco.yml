@@ -4,11 +4,12 @@
 
   tasks:
           - name: First test
-            shell: "systemctl status sshd.service | egrep -i 'active' | wc -l"
+            shell: "systemctl status sshd.service | egrep -i 'active'"
             register: result
           - name: debug
             debug:
               var: result
+              verbosity: 2
 
           - name: Check
             assert:
