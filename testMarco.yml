@@ -7,13 +7,17 @@
       shell: "systemctl status sshd.service | egrep -i 'active' | wc -l"
       register: result
 
+    - name: debug result
+      debug:
+        var: result
+
     - name: Second Command to excecute
-      shell: "apt list telnetd | wc -l"
+      shell: "apt-cache search telnetd | egrep ^telnetd | wc -l "
       register: result1
 
-    #- name: debug
-    #  debug:
-    #    var: result
+    - name: debug result1
+      debug:
+        var: result1 
 
     - name: Check results
       assert:
