@@ -1,11 +1,13 @@
 ---
 - hosts: lapoli.isprambiente.it
-  name: Check uptime of the remote host
+  name: First test
 
   tasks:
-          - name: Check uptime of remote Ubuntu server
-            shell: uptime
-            register: command_output
+          - name: First test
+            command: sudo systemctl status sshd.service | egrep -i "active" | wc -l 
+            register: result
 
-          - debug:
-                   var: command_output.stdout_lines
+          - name: Check
+            assert:
+              that:
+                   - 1 in result.stdout_lines
