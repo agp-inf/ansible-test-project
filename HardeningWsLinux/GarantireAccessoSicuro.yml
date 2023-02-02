@@ -1,7 +1,7 @@
 
 ---
 - name: Garantire accesso sicuro
-  hosts: localhost
+  hosts: lapoli.isprambiente.it
 
   tasks:
 
