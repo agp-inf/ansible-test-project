@@ -1,9 +1,15 @@
+
 ---
-- hosts: lapoli.isprambiente.it
-  name: Garantire accesso sicuro
+- name: Garantire accesso sicuro
+  hosts: localhost
 
   tasks:
-    - name: First Command to excecute
+
+    - name: set varibles
+      set_fact:
+        ansible_become_password: "tobeseto"
+
+    - name: Check sshd
       shell: "systemctl status sshd.service | egrep -i 'active' | wc -l"
       register: result
 
@@ -11,13 +17,14 @@
       debug:
         var: result
 
-    - name: Second Command to excecute
-      shell: "apt-cache search telnetd | egrep ^telnetd | wc -l "
+    - name: Check telnetd deamon
+      #become: true
+      shell: "ps - aux | grep telnet | wc -l"
       register: result1
 
     - name: debug result1
       debug:
-        var: result1 
+        var: result1
 
     - name: Check results
       assert:
