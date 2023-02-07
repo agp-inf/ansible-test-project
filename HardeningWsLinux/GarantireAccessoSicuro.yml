@@ -1,7 +1,7 @@
-
 ---
 - name: Garantire accesso sicuro
-  hosts: lapoli.isprambiente.it
+  hosts: localhost
+  ignore_errors: true
 
   tasks:
 
@@ -24,10 +24,67 @@
 
     - name: debug result1
       debug:
-        var: result1
+        var: result1 
 
     - name: Check results
       assert:
         that:
              - "'1' in result.stdout_lines"
              - "'0' in result1.stdout_lines"
+
+
+
+
+
+- name: password sicure
+  hosts: localhost
+  ignore_errors: true
+
+  tasks:
+    - name: Check1
+      shell: "grep '@include common-password' /etc/pam.d/sshd /etc/pam.d/passwd /etc/pam.d/login /etc/pam.d/newusers /etc/pam.d/other | wc -l"
+      register: result
+
+    - name: debug result
+      debug:
+        var: result
+
+    - name: Check results
+      assert:
+        that:
+             - "'5' in result.stdout_lines"
+
+    - name: Check2
+      shell: "awk '/^password.*pam_pwquality.so/ {print}' /etc/pam.d/common-password | wc -l"
+      register: result
+
+    - name: debug result
+      debug:
+        var: result
+
+    - name: Check results
+      assert:
+        that:
+             - "'1' in result.stdout_lines"
+
+
+
+
+
+- name: Account Lockout
+  hosts: localhost
+
+  tasks:
+    - name: Check faillock
+      shell: "grep pam_faillock /etc/pam.d/* | head -n1 | wc -l"
+      register: result
+
+    - name: debug result
+      debug:
+        var: result
+
+    - name: Check results
+      assert:
+        that:
+             - "'1' in result.stdout_lines"
+
