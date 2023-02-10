@@ -36,7 +36,7 @@
 
 
 
-- name: password sicure
+- name: password robuste
   hosts: localhost
   ignore_errors: true
 
@@ -69,10 +69,9 @@
 
 
 
-
-
 - name: Account Lockout
   hosts: localhost
+  ignore_errors: true
 
   tasks:
     - name: Check faillock
@@ -88,3 +87,21 @@
         that:
              - "'1' in result.stdout_lines"
 
+
+- name: Accounts di root
+  hosts: localhost
+  ignore_errors: true
+
+  tasks:
+    - name: Check uid
+      shell: "awk -F: '$3==0 {print $1 " uid "$3}' /etc/passwd | wc -l"
+      register: result
+
+    - name: debug result
+      debug:
+        var: result
+
+    - name: Check results
+      assert:
+        that:
+             - "'1' in result.stdout_lines"
