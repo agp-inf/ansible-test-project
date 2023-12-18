@@ -1,7 +1,8 @@
 ---
 - name: Upgrade all packages to the latest version
   hosts: all
-    
+  become: true
+  become_method: sudo  
   tasks:
   
   - name: Upgrade all packages to the latest version
